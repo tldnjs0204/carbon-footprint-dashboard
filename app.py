@@ -39,7 +39,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🌍 장거리 여행 교통수단별 탄소발자국 대시보드")
-st.markdown("이번 여행의 이동 수단과 시간이 기후변화에 미치는 영향을 **'녹색전환연구소 2030 목표 탄소 예산'**과 비교하여 확인해보세요.")
+st.markdown("이번 여행의 이동 수단과 시간이 기후변화에 미치는 영향을 '녹색전환연구소 2030 목표 탄소 예산'과 비교하여 확인해보세요.")
 st.markdown("---")
 
 # -----------------------------------------------------------------------------
@@ -84,7 +84,7 @@ selected_transport = st.sidebar.selectbox(
 
 # 이동 시간 슬라이더 최대값을 6.0시간으로 설정
 time_hours = st.sidebar.slider("1회 이동 시간 (편도 기준, 시간):", 0.5, 6.0, 2.5, step=0.5)
-frequency_per_trip = st.sidebar.slider("이용 횟수 (편도 탑승 기준):", 1, 10, 2)
+frequency_per_trip = st.sidebar.slider("이용 횟수 (편도 탑승 기준):", 1, 5, 2)
 
 # 선택된 교통수단의 데이터 조회
 selected_row = df.loc[df["교통수단"] == selected_transport].iloc[0]
@@ -130,7 +130,7 @@ st.markdown("---")
 # 5. 연간 탄소 허용량 대비 소진율 원형 그래프 (참고 사진 색상 반영)
 # -----------------------------------------------------------------------------
 st.subheader("🎯 연간 허용 탄소배출량 중 이번 여행 사용 비율")
-st.markdown("**녹색전환연구소 2030년 감축 목표 기준** 1인당 연간 허용 배출량은 **5.9톤 (5,900 kg CO₂)** 입니다.")
+st.markdown("녹색전환연구소 2030년 감축 목표 기준 1인당 연간 허용 배출량은 5.9톤 (5,900 kg CO₂) 입니다.")
 
 col_pie_left, col_pie_right = st.columns([1, 1])
 
@@ -231,7 +231,7 @@ with col_right:
     reduction_kg = total_emission_kg - train_total_kg
     
     if reduction_kg > 0:
-        st.success(f"🎉 동일 거리를 **고속열차(KTX/SRT)**로 전환할 경우, **{reduction_kg:,.2f} kg CO₂**를 줄일 수 있습니다!\n\n(이는 녹색전환연구소 연간 탄소 예산(5.9톤)의 **{(reduction_kg / ANNUAL_CARBON_BUDGET_KG)*100:.2f}%**를 아끼는 효과입니다!)")
+        st.success(f"🎉 동일 거리를 "고속열차(KTX/SRT)"로 전환할 경우, {reduction_kg:,.2f} kg CO₂를 줄일 수 있습니다!\n\n(이는 녹색전환연구소 연간 탄소 예산(5.9톤)의 {(reduction_kg / ANNUAL_CARBON_BUDGET_KG)*100:.2f}%를 아끼는 효과입니다!)")
     else:
         st.info("👍 이미 아주 친환경적인 대중교통 수단을 이용해 여행하고 계십니다! 훌륭합니다!")
         
