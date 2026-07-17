@@ -58,7 +58,7 @@ col_l, col_r = st.columns(2)
 with col_l:
     st.subheader("🎯 연간 허용량 대비 소진 비율")
     fig_pie = px.pie(values=[total_emission_kg, max(0, ANNUAL_CARBON_BUDGET_KG - total_emission_kg)], 
-                     names=["사용량", "잔여"], color_discrete_sequence=["#F2C4B1", "#34624C"], hole=0.4)
+                     names=["사용량", "잔여"], color_discrete_sequence=["#34624C", "#F2C4B1"], hole=0.4)
     st.plotly_chart(fig_pie, use_container_width=True)
 
 with col_r:
