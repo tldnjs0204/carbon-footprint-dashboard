@@ -27,7 +27,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🌍 장거리 여행 교통수단별 탄소발자국 대시보드")
+st.title("🌍 장거리 여행 탄소발자국 대시보드")
 st.markdown("이번 여행의 이동 수단과 시간이 기후변화에 미치는 영향을 확인해보세요.")
 st.markdown("---")
 
@@ -46,7 +46,7 @@ df["1시간당 배출량(g)"] = df["평균시속(km/h)"] * df["1km당 CO2 배출
 st.sidebar.header("🚗 장거리 여행 계산기")
 selected_transport = st.sidebar.selectbox("교통수단 선택:", df["교통수단"].tolist(), index=1)
 time_hours = st.sidebar.slider("편도 이동 시간(시간):", 0.5, 6.0, 2.5, step=0.5)
-frequency_per_trip = st.sidebar.slider("이용 횟수:", 1, 10, 2)
+frequency_per_trip = st.sidebar.slider("이용 횟수:", 1, 4, 2)
 
 row = df.loc[df["교통수단"] == selected_transport].iloc[0]
 total_emission_kg = (row["1시간당 배출량(g)"] * time_hours * frequency_per_trip) / 1000
