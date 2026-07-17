@@ -55,14 +55,15 @@ data = {
         "고속열차 (KTX/SRT)", 
         "시내버스", 
         "고속/시외버스", 
+        "전기 승용차 (BEV)",      # <-- 순수 전기차 선택지 완벽 추가!
         "하이브리드 승용차", 
         "가솔린 승용차", 
         "디젤 승용차", 
         "국내선 항공기"
     ],
-    "1km당 CO2 배출량(g)": [6, 14, 28, 33, 90, 150, 170, 255],
-    "평균시속(km/h)": [40, 200, 20, 80, 35, 35, 35, 600],
-    "카테고리": ["대중교통", "대중교통", "대중교통", "대중교통", "개인교통", "개인교통", "개인교통", "항공"]
+    "1km당 CO2 배출량(g)": [6, 14, 28, 33, 40, 90, 150, 170, 255],
+    "평균시속(km/h)": [40, 200, 20, 80, 35, 35, 35, 35, 600],
+    "카테고리": ["대중교통", "대중교통", "대중교통", "대중교통", "개인교통", "개인교통", "개인교통", "개인교통", "항공"]
 }
 
 df = pd.DataFrame(data)
@@ -129,7 +130,7 @@ st.markdown("---")
 # 5. 연간 탄소 허용량 대비 소진율 원형 그래프 (참고 사진 색상 반영)
 # -----------------------------------------------------------------------------
 st.subheader("🎯 연간 허용 탄소배출량 중 이번 여행 사용 비율")
-st.markdown(f"**녹색전환연구소 2030년 감축 목표 기준** 1인당 연간 허용 배출량은 **5.9톤 (5,900 kg CO₂)** 입니다.")
+st.markdown("**녹색전환연구소 2030년 감축 목표 기준** 1인당 연간 허용 배출량은 **5.9톤 (5,900 kg CO₂)** 입니다.")
 
 col_pie_left, col_pie_right = st.columns([1, 1])
 
@@ -206,7 +207,7 @@ with col_left:
         color_discrete_map=pastel_color_map,
         orientation='h',
         text="선택시간당 배출량(g)",
-        height=400
+        height=420
     )
     
     fig_bar.update_traces(texttemplate='%{text:,.0f} g', textposition='outside', marker_line_color='rgb(255,255,255)', marker_line_width=1.5)
@@ -230,8 +231,7 @@ with col_right:
     reduction_kg = total_emission_kg - train_total_kg
     
     if reduction_kg > 0:
-        st.success(f"🎉 동일 거리를 **고속열차(KTX/SRT)**로 전환할 경우, **{reduction_kg:,.2f} kg CO₂**를 줄일 수 있습니다!")
-        st.write(f"이는 녹색전환연구소 연간 탄소 예산(5.9톤)의 **{(reduction_kg / ANNUAL_CARBON_BUDGET_KG)*100:.2f}%**를 아끼는 효과입니다!")
+        st.success(f"🎉 동일 거리를 **고속열차(KTX/SRT)**로 전환할 경우, **{reduction_kg:,.2f} kg CO₂**를 줄일 수 있습니다!\n\n(이는 녹색전환연구소 연간 탄소 예산(5.9톤)의 **{(reduction_kg / ANNUAL_CARBON_BUDGET_KG)*100:.2f}%**를 아끼는 효과입니다!)")
     else:
         st.info("👍 이미 아주 친환경적인 대중교통 수단을 이용해 여행하고 계십니다! 훌륭합니다!")
         
